@@ -52,6 +52,17 @@
       <artifactId>druid</artifactId>
       <version>1.0.5</version>
     </dependency>
+    <!--添加jedis依赖-->
+    <dependency>
+      <groupId>redis.clients</groupId>
+      <artifactId>jedis</artifactId>
+    </dependency>
+    <!--添加fastjson依赖-->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
+      <version>1.2.38</version>
+    </dependency>
   </dependencies>
 
   <build>

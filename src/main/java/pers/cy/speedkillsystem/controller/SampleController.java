@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pers.cy.speedkillsystem.domain.User;
+import pers.cy.speedkillsystem.redis.RedisService;
 import pers.cy.speedkillsystem.result.CodeMsg;
 import pers.cy.speedkillsystem.result.Result;
 import pers.cy.speedkillsystem.service.UserService;
@@ -15,6 +16,9 @@ import pers.cy.speedkillsystem.service.UserService;
 public class SampleController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private RedisService redisService;
 
     @RequestMapping("/thymeleaf")
     public String thymeleaf(Model model) {
@@ -40,7 +44,17 @@ public class SampleController {
     @RequestMapping("/db/tx")
     @ResponseBody
     public Result<Boolean> dbTx() {
+        // 执行事务
         userService.tx();
         return Result.success(true);
+    }
+
+    @RequestMapping("/redis/get")
+    @ResponseBody
+    public Result<Long> redisGet() {
+        // 通过自己编写的redisService进行操作  通过key值取得redis中的数据，并将其转化为指定的类型进行返回，这里就是将key3的数据转换成Long类型返回
+        Long v1 = redisService.get("key3", Long.class);
+        // 将该数据返回界面
+        return Result.success(v1);
     }
 }
