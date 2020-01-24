@@ -21,15 +21,17 @@ public class RedisService {
      * @param <T> 泛型类型
      * @return 从redis中取得的数据
      */
-    public <T> T get(String key, Class<T> clazz) {
+    public <T> T get(KeyPrefix prefix, String key, Class<T> clazz) {
         // 创建jedis对象，准备从连接池中获取该对象，用来操作redis
         Jedis jedis = null;
         // 使用连接池在使用完要将其释放
         try {
             // 通过连接池获得jedis对象
             jedis = jedisPool.getResource();
+            // 生成真正的key
+            String realKey = prefix.getPrefix() + key;
             // jedis这个对象的get方法返回的都是String类型，先通过key获取数据
-            String str = jedis.get(key);
+            String str = jedis.get(realKey);
             // 将获取到的String数据转换成指定的类型对象
             T t = stringToBean(str, clazz);
             // 返回该对象
@@ -47,7 +49,7 @@ public class RedisService {
      * @param <T> 值的类型
      * @return true/false
      */
-    public <T> boolean set(String key, T value) {
+    public <T> boolean set(KeyPrefix prefix, String key, T value) {
         // 创建jedis对象，准备从连接池中获取该对象，用来操作redis
         Jedis jedis = null;
         // 使用连接池在使用完要将其释放
@@ -60,11 +62,91 @@ public class RedisService {
             if (str == null || str.length() <= 0) {
                 return false;
             }
-            // 将数据放入redis
-            jedis.set(key, str);
+            // 生成真正的key
+            String realKey = prefix.getPrefix() + key;
+            // 获取用户设定的有效时长
+            int seconds = prefix.expireSeconds();
+            // 永不过期
+            if (seconds <= 0) {
+                // 将数据放入redis
+                jedis.set(realKey, str);
+            // 其他情况要设置有效时长
+            } else {
+                // setex方法创建有有效期的键值对
+                jedis.setex(realKey, seconds, str);
+            }
             return true;
         } finally {
             // 释放
+            returnToPool(jedis);
+        }
+    }
+
+    /**
+     * 判断一个key存不存在
+     * @param prefix
+     * @param key
+     * @param <T>
+     * @return
+     */
+    public <T> boolean exists(KeyPrefix prefix, String key) {
+        // 创建jedis对象，准备从连接池中获取该对象，用来操作redis
+        Jedis jedis = null;
+        // 使用连接池在使用完要将其释放
+        try {
+            // 通过连接池获得jedis对象
+            jedis = jedisPool.getResource();
+            // 生成真正的key
+            String realKey = prefix.getPrefix() + key;
+            return jedis.exists(realKey);
+        } finally {
+            // 释放资源
+            returnToPool(jedis);
+        }
+    }
+
+    /**
+     * 将指定key的值增加1
+     * @param prefix
+     * @param key
+     * @param <T>
+     * @return
+     */
+    public <T> Long incr(KeyPrefix prefix, String key) {
+        // 创建jedis对象，准备从连接池中获取该对象，用来操作redis
+        Jedis jedis = null;
+        // 使用连接池在使用完要将其释放
+        try {
+            // 通过连接池获得jedis对象
+            jedis = jedisPool.getResource();
+            // 生成真正的key  将该类型默认的key和用户自己设定的key拼接起来
+            String realKey = prefix.getPrefix() + key;
+            return jedis.incr(realKey);
+        } finally {
+            // 释放资源
+            returnToPool(jedis);
+        }
+    }
+
+    /**
+     * 将指定key的值减少1
+     * @param prefix
+     * @param key
+     * @param <T>
+     * @return
+     */
+    public <T> Long decr(KeyPrefix prefix, String key) {
+        // 创建jedis对象，准备从连接池中获取该对象，用来操作redis
+        Jedis jedis = null;
+        // 使用连接池在使用完要将其释放
+        try {
+            // 通过连接池获得jedis对象
+            jedis = jedisPool.getResource();
+            // 生成真正的key
+            String realKey = prefix.getPrefix() + key;
+            return jedis.decr(realKey);
+        } finally {
+            // 释放资源
             returnToPool(jedis);
         }
     }

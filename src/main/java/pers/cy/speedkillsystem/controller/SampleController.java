@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pers.cy.speedkillsystem.domain.User;
 import pers.cy.speedkillsystem.redis.RedisService;
+import pers.cy.speedkillsystem.redis.UserKey;
 import pers.cy.speedkillsystem.result.CodeMsg;
 import pers.cy.speedkillsystem.result.Result;
 import pers.cy.speedkillsystem.service.UserService;
@@ -51,10 +52,24 @@ public class SampleController {
 
     @RequestMapping("/redis/get")
     @ResponseBody
-    public Result<Long> redisGet() {
+    public Result<User> redisGet() {
         // 通过自己编写的redisService进行操作  通过key值取得redis中的数据，并将其转化为指定的类型进行返回，这里就是将key3的数据转换成Long类型返回
-        Long v1 = redisService.get("key3", Long.class);
+        User user = redisService.get(UserKey.getById, "" + 1, User.class);
         // 将该数据返回界面
-        return Result.success(v1);
+        return Result.success(user);
+    }
+
+    @RequestMapping("/redis/set")
+    @ResponseBody
+    public Result<Boolean> redisSet() {
+        User user = new User();
+        user.setId(1);
+        user.setName("1111");
+        redisService.set(UserKey.getById, "1", user); // UserKey:id1
+//        // 通过自己编写的redisService进行操作  通过key值取得redis中的数据，并将其转化为指定的类型进行返回，这里就是将key3的数据转换成Long类型返回
+//        Boolean v1 = redisService.set(UserKey.getById, "key2", "hello world");
+//        String str = redisService.get("key2", String.class);
+        // 将该数据返回界面
+        return Result.success(true);
     }
 }
