@@ -1,0 +1,66 @@
+package pers.cy.speedkillsystem.controller;
+
+import com.sun.org.apache.bcel.internal.classfile.Code;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.thymeleaf.util.StringUtils;
+import pers.cy.speedkillsystem.result.CodeMsg;
+import pers.cy.speedkillsystem.result.Result;
+import pers.cy.speedkillsystem.service.SksUserService;
+import pers.cy.speedkillsystem.util.ValidatorUtil;
+import pers.cy.speedkillsystem.vo.LoginVo;
+
+@Controller
+@RequestMapping("/login")
+public class LoginController {
+    private static Logger logger = LoggerFactory.getLogger(LoginController.class);
+
+    @Autowired
+    private SksUserService userService;
+
+    /**
+     * 跳转到登录页面
+     * @return
+     */
+    @RequestMapping("/to_login")
+    public String toLogin() {
+        return "login";
+    }
+
+    @RequestMapping("/do_login")
+    // 下面这个注解的含义是要向客户端响应一个对象
+    @ResponseBody
+    public Result<Boolean> doLogin(LoginVo loginVo) {
+        logger.info(loginVo.toString());
+
+        // 参数校验
+        String passInput = loginVo.getPassword();
+        String mobile = loginVo.getMobile();
+        // 判断密码是否为空
+        if (StringUtils.isEmpty(passInput)) {
+            return Result.error(CodeMsg.PASSWORD_EMPTY);
+        }
+        // 判断手机号是否为空
+        if (StringUtils.isEmpty(mobile)) {
+            return Result.error(CodeMsg.MOBILE_EMPTY);
+        }
+
+        // 判断是否符合格式
+        if (!ValidatorUtil.isMobile(mobile)) {
+            return Result.error(CodeMsg.MOBILE_ERROR);
+        }
+
+        // 登录
+        CodeMsg codeMsg = userService.login(loginVo);
+        if (codeMsg.getCode() == 0) {
+            return Result.success(true);
+        } else {
+            // 这个error的返回值的类型定义的是泛型，而传入的参数无法规定泛型类型，在这里就直接可以是任何类型，比如doLogin方法要求返回的是boolean，那么这个Result.error方法的返回值就可以是boolean类型
+            return Result.error(codeMsg);
+        }
+    }
+}

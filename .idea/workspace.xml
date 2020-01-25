@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="32e8452f-5bc7-462b-aec3-a67791dd3881" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/result/CodeMsg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/result/CodeMsg.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/result/Result.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/result/Result.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +51,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/templates" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -63,9 +65,28 @@
     <property name="project.structure.side.proportion" value="0.5275862" />
     <property name="settings.editor.selected.configurable" value="spring.boot" />
   </component>
-  <component name="RunManager" selected="Application.MD5Util">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\我的电脑\文档\开发项目\秒杀系统\Speed-Kill-System\src\main\resources\templates" />
+      <recent name="C:\我的电脑\文档\开发项目\秒杀系统\Speed-Kill-System\src\main\resources" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.MainApplication">
     <configuration name="MD5Util" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="pers.cy.speedkillsystem.util.MD5Util" />
+      <module name="Speed-Kill-System" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="pers.cy.speedkillsystem.util.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ValidatorUtil" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="pers.cy.speedkillsystem.util.ValidatorUtil" />
       <module name="Speed-Kill-System" />
       <extension name="coverage">
         <pattern>
@@ -92,8 +113,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.MD5Util" />
         <item itemvalue="Spring Boot.MainApplication" />
+        <item itemvalue="Application.ValidatorUtil" />
+        <item itemvalue="Application.MD5Util" />
       </list>
     </recent_temporary>
   </component>
@@ -109,7 +131,9 @@
       <updated>1579744449960</updated>
       <workItem from="1579744454315" duration="11943000" />
       <workItem from="1579767667305" duration="15350000" />
-      <workItem from="1579832088907" duration="10904000" />
+      <workItem from="1579832088907" duration="15190000" />
+      <workItem from="1579880473066" duration="630000" />
+      <workItem from="1579937613969" duration="7812000" />
     </task>
     <servers />
   </component>
@@ -117,42 +141,42 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="574" y="97" key="#com.intellij.ide.util.MemberChooser" timestamp="1579833789669">
+    <state x="574" y="97" key="#com.intellij.ide.util.MemberChooser" timestamp="1579942204133">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="574" y="97" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1579833789669" />
-    <state width="1493" height="156" key="GridCell.Tab.0.bottom" timestamp="1579858399971">
+    <state x="574" y="97" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1579942204133" />
+    <state width="1493" height="157" key="GridCell.Tab.0.bottom" timestamp="1579945825373">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="156" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1579858399971" />
-    <state width="1493" height="156" key="GridCell.Tab.0.center" timestamp="1579858399971">
+    <state width="1493" height="157" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1579945825373" />
+    <state width="1493" height="157" key="GridCell.Tab.0.center" timestamp="1579945825373">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="156" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1579858399971" />
-    <state width="1493" height="156" key="GridCell.Tab.0.left" timestamp="1579858399970">
+    <state width="1493" height="157" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1579945825373" />
+    <state width="1493" height="157" key="GridCell.Tab.0.left" timestamp="1579945825373">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="156" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1579858399970" />
-    <state width="1493" height="156" key="GridCell.Tab.0.right" timestamp="1579858399971">
+    <state width="1493" height="157" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1579945825373" />
+    <state width="1493" height="157" key="GridCell.Tab.0.right" timestamp="1579945825373">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="156" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1579858399971" />
-    <state width="1493" height="156" key="GridCell.Tab.1.bottom" timestamp="1579858399971">
+    <state width="1493" height="157" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1579945825373" />
+    <state width="1493" height="157" key="GridCell.Tab.1.bottom" timestamp="1579945825374">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="156" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1579858399971" />
-    <state width="1493" height="156" key="GridCell.Tab.1.center" timestamp="1579858399971">
+    <state width="1493" height="157" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1579945825374" />
+    <state width="1493" height="157" key="GridCell.Tab.1.center" timestamp="1579945825374">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="156" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1579858399971" />
-    <state width="1493" height="156" key="GridCell.Tab.1.left" timestamp="1579858399971">
+    <state width="1493" height="157" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1579945825374" />
+    <state width="1493" height="157" key="GridCell.Tab.1.left" timestamp="1579945825374">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="156" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1579858399971" />
-    <state width="1493" height="156" key="GridCell.Tab.1.right" timestamp="1579858399971">
+    <state width="1493" height="157" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1579945825374" />
+    <state width="1493" height="157" key="GridCell.Tab.1.right" timestamp="1579945825374">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="156" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1579858399971" />
+    <state width="1493" height="157" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1579945825374" />
     <state x="270" y="0" key="SettingsEditor" timestamp="1579773495384">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -161,9 +185,9 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="190" y="133" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1579744752123" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1579782106090">
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1579938347803">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1579782106090" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1579938347803" />
   </component>
 </project>

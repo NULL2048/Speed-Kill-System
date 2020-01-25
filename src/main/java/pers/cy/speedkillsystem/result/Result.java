@@ -3,6 +3,7 @@ package pers.cy.speedkillsystem.result;
 /**
  * rest api json输出
  * 规定返回值含义
+ * 这个类是用来封装服务器向客户端返回的数据的
  */
 public class Result<T> {
     // 响应码，默认0是成功
@@ -23,7 +24,7 @@ public class Result<T> {
     }
 
     /**
-     * 失败时候的调用
+     * 失败时候的调用,用来获得失败信息的返回对象
      * @param codeMsg  里面存放了错误代码以及对应的错误信息
      * @param <T>
      * @return
