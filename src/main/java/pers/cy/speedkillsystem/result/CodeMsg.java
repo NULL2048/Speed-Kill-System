@@ -13,6 +13,8 @@ public class CodeMsg {
     // 通用异常
     public static CodeMsg SUCCESS = new CodeMsg(0, "success");
     public static CodeMsg SERVER_ERROR = new CodeMsg(500100, "服务器异常");
+    public static CodeMsg BIND_ERROR = new CodeMsg(500101, "参数校验异常：%s");
+
     // 登录模块 5002XX
     public static CodeMsg SESSION_ERROR = new CodeMsg(500210, "Session不存在或者已经失效");
     public static CodeMsg PASSWORD_EMPTY = new CodeMsg(500211, "密码不能为空");
@@ -44,5 +46,19 @@ public class CodeMsg {
 
     public String getMsg() {
         return msg;
+    }
+
+    // 参数是变参 即可以写任意多个参数
+    public CodeMsg fillArgs(Object... args) {
+        int code = this.code;
+        // 根据msg的指定格式，讲args的内容格式化输出成String  这个就可以用在BIND_ERROR这个上面
+        // String.format是字符串格式化输出
+        String message = String.format(this.msg, args);
+        return new CodeMsg(code, message);
+    }
+
+    @Override
+    public String toString() {
+        return "CodeMsg [code=" + code + ", msg=" + msg + "]";
     }
 }

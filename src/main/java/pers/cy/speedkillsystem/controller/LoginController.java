@@ -57,12 +57,7 @@ public class LoginController {
 //        }
 
         // 登录
-        CodeMsg codeMsg = userService.login(loginVo);
-        if (codeMsg.getCode() == 0) {
-            return Result.success(true);
-        } else {
-            // 这个error的返回值的类型定义的是泛型，而传入的参数无法规定泛型类型，在这里就直接可以是任何类型，比如doLogin方法要求返回的是boolean，那么这个Result.error方法的返回值就可以是boolean类型
-            return Result.error(codeMsg);
-        }
+        userService.login(loginVo);
+        return Result.success(true);
     }
 }
