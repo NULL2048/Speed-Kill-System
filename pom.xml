@@ -73,6 +73,12 @@
       <artifactId>commons-lang3</artifactId>
       <version>3.6</version>
     </dependency>
+    <!--添加自定义参数校验器+全局异常处理器依赖-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-validation</artifactId>
+    </dependency>
+
   </dependencies>
 
   <build>

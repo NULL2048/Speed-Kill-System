@@ -13,6 +13,11 @@ public class ValidatorUtil {
     // 手机号格式  开头的1就是表示手机号的第一个数字只能是1 然后后面的d{10}表示1后面应该是十个数字
     private static final Pattern mobile_pattern = Pattern.compile("1\\d{10}");
 
+    /**
+     * 校验是否是手机号
+     * @param src
+     * @return
+     */
     public static boolean isMobile(String src) {
         // 判空
         if (StringUtils.isEmpty(src)) {
