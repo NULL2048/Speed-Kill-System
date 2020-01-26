@@ -23,6 +23,7 @@ import java.util.List;
 @ResponseBody
 public class GlobalExceptionHandler {
     // 下面这个注解表示拦截哪一类异常，这里的参数是Exception.class，也就是拦截controller抛出了所有异常，这里只是拦截controller抛出的异常，不拦截其他的类抛出的异常
+    // 方法的返回值就是打印在控制台的内容
     @ExceptionHandler(value = Exception.class)
     public Result<String> exceptionHandler(HttpServletRequest request, Exception e) {
         if (e instanceof GlobalException) {
@@ -38,7 +39,7 @@ public class GlobalExceptionHandler {
             // 获得DefaultMessage
             String msg = error.getDefaultMessage();
 
-            // 返回错误信息
+            // 返回错误信息  这些错误信息就会被打印在后台控制台
             return Result.error(CodeMsg.BIND_ERROR.fillArgs(msg));
         } else {
             return Result.error(CodeMsg.SERVER_ERROR);

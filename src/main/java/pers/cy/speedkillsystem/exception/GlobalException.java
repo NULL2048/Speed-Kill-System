@@ -4,7 +4,7 @@ import pers.cy.speedkillsystem.result.CodeMsg;
 
 /**
  * 全局异常
- * 所有的异常向上层抛出的时候都要使用这个类，这样才可以夹带自己设定的错误信息
+ * 所有的异常向上层抛出的时候都要使用这个类，这样才可以夹带自己设定的错误信息，也方便统一管理异常
  */
 public class GlobalException extends RuntimeException{
     private static final long serialVersionUID = 1L;

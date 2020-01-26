@@ -14,6 +14,7 @@ import pers.cy.speedkillsystem.service.SksUserService;
 import pers.cy.speedkillsystem.util.ValidatorUtil;
 import pers.cy.speedkillsystem.vo.LoginVo;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 @Controller
@@ -36,7 +37,7 @@ public class LoginController {
     @RequestMapping("/do_login")
     // 下面这个注解的含义是要向客户端响应一个对象
     @ResponseBody
-    public Result<Boolean> doLogin(@Valid LoginVo loginVo) {
+    public Result<Boolean> doLogin(@Valid LoginVo loginVo, HttpServletResponse response) {
         logger.info(loginVo.toString());
 
         // 参数校验 因为引入了校验注解，所以下面这一段就不需要了
@@ -57,7 +58,7 @@ public class LoginController {
 //        }
 
         // 登录
-        userService.login(loginVo);
+        userService.login(loginVo, response);
         return Result.success(true);
     }
 }
