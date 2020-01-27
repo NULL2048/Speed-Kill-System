@@ -39,13 +39,14 @@
             <td>秒杀开始时间</td>
             <td th:text="${#dates.format(goods.startDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
             <td id="miaoshaTip">
+                <!--要用一个隐藏标签，因为前端不能对后端传过来的数据进行修改，所以只能先把后端的数据赋值给前端的标签value，然后对value进行修改，下面的span标签中读取这个隐藏标签的值-->
                 <input type="hidden" id="remainSeconds" th:value="${remainSeconds}"/>
                 <span th:if="${speedKillStatus eq 0}">秒杀倒计时：<span id="countDown"></span>秒</span>
                 <span th:if="${speedKillStatus eq 1}">秒杀进行中</span>
                 <span th:if="${speedKillStatus eq 2}">秒杀已经结束</span>
             </td>
             <td>
-                <form id="miaoshaForm" method="post" action="/miaosha/do_miaosha">
+                <form id="miaoshaForm" method="post" action="/speed_kill/do_speed_kill">
                     <button class="btn btn-primary btn-block" type="submit" id="buyButton">立即秒杀</button>
                     <input type="hidden" name="goodsId" th:value="${goods.id}" />
                 </form>
@@ -73,9 +74,11 @@
         countDown();
     });
 
+    //将时间减1
     function countDown() {
-        // inpu使用.val()
+        // 取得隐藏标签的值
         var remainSeconds = $("#remainSeconds").val();
+        // 存储定时器id
         var timeout;
 
         // 秒杀还没开始，倒计时
@@ -83,11 +86,13 @@
             // 秒杀按钮不可点
             $("#buyButton").attr("disabled", true);
 
-            // 每隔1秒就重新调用一边countDown()方法，达到倒计时效果
+            // setTimeout的返回值是定时器id
             timeout = setTimeout(function () {
-                // span使用.text()
+                // 将页面显示的秒数减一
                 $("#countDown").text(remainSeconds - 1);
+                // 更新隐藏标签的值
                 $("#remainSeconds").val(remainSeconds - 1);
+                // 重新调用这个方法
                 countDown();
             },1000);
 
@@ -96,7 +101,9 @@
         } else if (remainSeconds == 0) {
             // 秒杀按钮可点
             $("#buyButton").attr("disabled", false);
+
             if (timeout) {
+                // 如果timeout有值的话就停止该定时器id对应的定时器
                 clearTimeout(timeout);
             }
             $("#miaoshaTip").html("秒杀进行中");

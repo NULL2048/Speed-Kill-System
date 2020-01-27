@@ -25,13 +25,15 @@ public class CodeMsg {
 
 
 
-
-
     // 商品模块 5003XX
 
     // 订单模块 5004XX
 
     // 秒杀模块 5005XX
+    public static CodeMsg SPEED_KILL_OVER = new CodeMsg(500500, "商品已经秒杀完毕");
+    public static CodeMsg REPEATE_SPEED_KILL = new CodeMsg(500501, "不能重复秒杀");
+
+
 
 
     private CodeMsg(int code, String msg) {
