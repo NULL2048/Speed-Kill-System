@@ -53,7 +53,7 @@ public class SksUserService {
         // 判空
         if (user != null) {
             // 延长有效期  这样每一次成功校验了凭证之后就可以重新延长有效期，在真实项目中都是这样的原则
-            addCookie(user, response);
+            addCookie(user, token, response);
         }
 
         return user;
@@ -93,36 +93,21 @@ public class SksUserService {
 
         // 用户登录完成之后需要生成一个token登陆凭证发给服务器  这样与本地的cookie相关联。用来标识登陆后用户的身份
         String token = UUIDUtil.uuid();
-        // 将生成的token存放到第三方缓存数据库中，这样效率是最高的  也就是设置分布式session，不用原生的session了，用redis代替以前session的功能
-        // 前两个参数形成真正的key，后一个参数是value  key就是token，value就是user对象
-        redisService.set(SksUserKey.token, token, user);
-        // 将token存放到cookie中，然后向用户发请求的时候就会通过session将cookie中的内容传入到服务器
-        Cookie cookie = new Cookie(COOKIE_NAME_TOKEN, token);
-        // 将cookie的有效期和分布式session中的有效期设为一致
-        cookie.setMaxAge(SksUserKey.token.expireSeconds());
-
-        // 设置cookie有效路径，/表示项目根路径，即cookie在所有路径下都有效
-        cookie.setPath("/");
-        // 将cookie添加到response中从服务器响应到客户端，这样客户端也就存有这个cookie了
-        response.addCookie(cookie);
 
         // 只要客户端本地已经有了cookie，在cookie的有效时长内，有效路径内的所有向服务器发送的请求request对象都会自动携带者cookie给服务器
         // 这样也就是在登陆以后的所有请求都会携带这cookie中的token来让服务器进行身份校验
 
-        // 生成cookie，并将其添加到redis中
-        addCookie(user, response);
+        addCookie(user, token, response);
 
         return true;
     }
 
     /**
-     * 生成cookie，并将其添加到redis中
+     * 根据传入的token生成cookie，并将其添加到redis中
      * @param user
      * @param response
      */
-    private void addCookie(SksUser user, HttpServletResponse response) {
-        // 用户登录完成之后需要生成一个token登陆凭证发给服务器  这样与本地的cookie相关联。用来标识登陆后用户的身份
-        String token = UUIDUtil.uuid();
+    private void addCookie(SksUser user, String token, HttpServletResponse response) {
         // 将生成的token存放到第三方缓存数据库中，这样效率是最高的  也就是设置分布式session，不用原生的session了，用redis代替以前session的功能
         // 前两个参数形成真正的key，后一个参数是value
         redisService.set(SksUserKey.token, token, user);
