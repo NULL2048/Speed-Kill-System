@@ -2,9 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="32e8452f-5bc7-462b-aec3-a67791dd3881" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/config/UserArgumentResolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/config/UserArgumentResolver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/MainApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/controller/GoodsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/controller/GoodsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/service/SksUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/service/SksUserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pers/cy/speedkillsystem/MainApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pers/cy/speedkillsystem/MainApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pers/cy/speedkillsystem/controller/GoodsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pers/cy/speedkillsystem/controller/GoodsController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pers/cy/speedkillsystem/controller/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pers/cy/speedkillsystem/controller/LoginController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pers/cy/speedkillsystem/service/SksUserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pers/cy/speedkillsystem/service/SksUserService.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,9 +23,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="AnnotationType" />
-        <option value="Class" />
         <option value="Interface" />
         <option value="HTML File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -52,7 +60,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/templates" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/util" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -73,6 +81,7 @@
       <recent name="pers.cy.speedkillsystem.redis" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\我的电脑\文档\开发项目\秒杀系统\Speed-Kill-System\src\main\java\pers\cy\speedkillsystem\util" />
       <recent name="C:\我的电脑\文档\开发项目\秒杀系统\Speed-Kill-System\src\main\resources\templates" />
       <recent name="C:\我的电脑\文档\开发项目\秒杀系统\Speed-Kill-System\src\main\resources\static" />
       <recent name="C:\我的电脑\文档\开发项目\秒杀系统\Speed-Kill-System\src\main\resources" />
@@ -81,6 +90,19 @@
   <component name="RunManager" selected="Spring Boot.MainApplication">
     <configuration name="MD5Util" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="pers.cy.speedkillsystem.util.MD5Util" />
+      <module name="Speed-Kill-System" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="pers.cy.speedkillsystem.util.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserUtil" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="pers.cy.speedkillsystem.util.UserUtil" />
       <module name="Speed-Kill-System" />
       <extension name="coverage">
         <pattern>
@@ -121,6 +143,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.MainApplication" />
+        <item itemvalue="Application.UserUtil" />
         <item itemvalue="Application.ValidatorUtil" />
         <item itemvalue="Application.MD5Util" />
       </list>
@@ -145,6 +168,8 @@
       <workItem from="1580091324834" duration="25300000" />
       <workItem from="1580186471584" duration="2741000" />
       <workItem from="1580310032617" duration="2026000" />
+      <workItem from="1580356193225" duration="4186000" />
+      <workItem from="1580385433303" duration="5874000" />
     </task>
     <servers />
   </component>
@@ -152,42 +177,50 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="574" y="97" key="#com.intellij.ide.util.MemberChooser" timestamp="1580112009047">
+    <state x="574" y="97" key="#com.intellij.ide.util.MemberChooser" timestamp="1580395260831">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="574" y="97" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1580112009047" />
-    <state width="1493" height="209" key="GridCell.Tab.0.bottom" timestamp="1580311964770">
+    <state x="574" y="97" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1580395260831" />
+    <state x="449" y="142" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1580396545344">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="209" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1580311964770" />
-    <state width="1493" height="209" key="GridCell.Tab.0.center" timestamp="1580311964770">
+    <state x="449" y="142" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1536.824@0.0.1536.824" timestamp="1580396545344" />
+    <state x="499" y="162" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog" timestamp="1580357611049">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="209" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1580311964770" />
-    <state width="1493" height="209" key="GridCell.Tab.0.left" timestamp="1580311964770">
+    <state x="499" y="162" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog/0.0.1536.824@0.0.1536.824" timestamp="1580357611049" />
+    <state width="1493" height="273" key="GridCell.Tab.0.bottom" timestamp="1580398430515">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="209" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1580311964770" />
-    <state width="1493" height="209" key="GridCell.Tab.0.right" timestamp="1580311964770">
+    <state width="1493" height="273" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1580398430515" />
+    <state width="1493" height="273" key="GridCell.Tab.0.center" timestamp="1580398430515">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="209" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1580311964770" />
-    <state width="1493" height="209" key="GridCell.Tab.1.bottom" timestamp="1580311964771">
+    <state width="1493" height="273" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1580398430515" />
+    <state width="1493" height="273" key="GridCell.Tab.0.left" timestamp="1580398430515">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="209" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1580311964771" />
-    <state width="1493" height="209" key="GridCell.Tab.1.center" timestamp="1580311964771">
+    <state width="1493" height="273" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1580398430515" />
+    <state width="1493" height="273" key="GridCell.Tab.0.right" timestamp="1580398430515">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="209" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1580311964771" />
-    <state width="1493" height="209" key="GridCell.Tab.1.left" timestamp="1580311964770">
+    <state width="1493" height="273" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1580398430515" />
+    <state width="1493" height="273" key="GridCell.Tab.1.bottom" timestamp="1580398430516">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="209" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1580311964770" />
-    <state width="1493" height="209" key="GridCell.Tab.1.right" timestamp="1580311964771">
+    <state width="1493" height="273" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1580398430516" />
+    <state width="1493" height="273" key="GridCell.Tab.1.center" timestamp="1580398430515">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="209" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1580311964771" />
+    <state width="1493" height="273" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1580398430515" />
+    <state width="1493" height="273" key="GridCell.Tab.1.left" timestamp="1580398430515">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="273" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1580398430515" />
+    <state width="1493" height="273" key="GridCell.Tab.1.right" timestamp="1580398430516">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="273" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1580398430516" />
     <state width="1493" height="261" key="GridCell.Tab.2.bottom" timestamp="1580138934306">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -212,21 +245,25 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="323" y="152" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1536.824@0.0.1536.824" timestamp="1580138462149" />
+    <state x="457" y="167" width="621" height="490" key="find.popup" timestamp="1580357621929">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="457" y="167" width="621" height="490" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1580357621929" />
     <state x="190" y="133" key="new project wizard" timestamp="1579744752123">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="190" y="133" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1579744752123" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1580311258591">
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1580396371376">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1580311258591" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1580396371376" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/controller/GoodsController.java</url>
-          <line>74</line>
+          <line>130</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint type="java-line">

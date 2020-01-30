@@ -65,7 +65,7 @@ public class SksUserService {
      * 用户登陆操作
      * @param loginVo
      */
-    public boolean login(LoginVo loginVo, HttpServletResponse response) {
+    public String login(LoginVo loginVo, HttpServletResponse response) {
         // 判空
         if (loginVo == null) {
             // 向上抛出异常  最终会由自己编写的异常处理器来处理
@@ -91,6 +91,7 @@ public class SksUserService {
             // return CodeMsg.PASSWORD_ERROR;
         }
 
+        // 生成cookie
         // 用户登录完成之后需要生成一个token登陆凭证发给服务器  这样与本地的cookie相关联。用来标识登陆后用户的身份
         String token = UUIDUtil.uuid();
 
@@ -99,7 +100,7 @@ public class SksUserService {
 
         addCookie(user, token, response);
 
-        return true;
+        return token;
     }
 
     /**

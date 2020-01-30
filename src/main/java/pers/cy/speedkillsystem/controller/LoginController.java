@@ -37,7 +37,7 @@ public class LoginController {
     @RequestMapping("/do_login")
     // 下面这个注解的含义是要向客户端响应一个对象
     @ResponseBody
-    public Result<Boolean> doLogin(@Valid LoginVo loginVo, HttpServletResponse response) {
+    public Result<String> doLogin(@Valid LoginVo loginVo, HttpServletResponse response) {
         logger.info(loginVo.toString());
 
         // 参数校验 因为引入了校验注解，所以下面这一段就不需要了
@@ -58,7 +58,7 @@ public class LoginController {
 //        }
 
         // 登录
-        userService.login(loginVo, response);
-        return Result.success(true);
+        String token = userService.login(loginVo, response);
+        return Result.success(token);
     }
 }
