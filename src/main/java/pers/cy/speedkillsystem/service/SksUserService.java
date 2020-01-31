@@ -30,17 +30,57 @@ public class SksUserService {
 
     /**
      * 通过ID查询用户
-     * 从db中查找
+     * 这里也做了一个对象缓存，这里只有一级缓存，之前惠农网项目我们做的是二级缓存，还有一个caffein的本地缓存
      * @param id
      * @return
      */
     public SksUser getById(long id) {
-        return sksUserDao.getById(id);
+        // 取缓存
+        SksUser user = redisService.get(SksUserKey.getById, "" + id, SksUser.class);
+        if (user != null) {
+            return user;
+        }
+        // 取数据库
+        user = sksUserDao.getById(id);
+        if (user != null) {
+            redisService.set(SksUserKey.getById, "" + id, user);
+        }
+        return user;
+    }
+
+    /**
+     * 修改密码
+     * 实现对象级缓存
+     * @param token
+     * @param id
+     * @param formPass
+     * @return
+     */
+    public boolean updatePassword(String token, long id, String formPass) {
+        // 取user
+        SksUser user = getById(id);
+        if (user == null) {
+            throw new GlobalException(CodeMsg.MOBILE_NOT_EXIST);
+        }
+        // 更新数据库
+        SksUser toBeUpdate = new SksUser();
+        toBeUpdate.setId(id);
+        toBeUpdate.setPassword(MD5Util.formPassToDBPass(formPass, user.getSalt()));
+        // 这里之所以单独创建一个user对象，更新传参的时候相当于只穿两个参数id和password进去，这样在执行sql的时候效率比直接创建一个新的user对象，把所有的属性都更新一遍地sql效率要高，这也是一个提高sql执行效率地小技巧
+        sksUserDao.update(toBeUpdate);
+        // 更新缓存  修改完db就要也一起更新缓存数据，否则会造成数据库和缓存不一致
+        // 将用户信息的缓存删掉
+        redisService.delete(SksUserKey.getById, "" + id);
+        // 将token中的user数据更新
+        user.setPassword(toBeUpdate.getPassword());
+        redisService.set(SksUserKey.token, token, user);
+
+        return true;
     }
 
     /**
      * 通过token找到用户
-     * 从redis中查找
+     * 从redis中查找  这个做的就是对象缓存
      * @param token
      * @return
      */

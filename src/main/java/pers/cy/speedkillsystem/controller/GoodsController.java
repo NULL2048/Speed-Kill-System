@@ -69,12 +69,8 @@ public class GoodsController {
 //
 //        // 根据token取得用户对象
 //        SksUser user = sksUserService.getByToken(token, response);
-        model.addAttribute("user", user);
-        // 查询商品列表
-        List<GoodsVo> goodsVoList = goodsService.listGoodsVo();
-        model.addAttribute("goodsList", goodsVoList);
 
-        // return "goods_list";
+        model.addAttribute("user", user);
 
         // 取缓存  如果能在缓存中取到界面就直接返回，如果取不到就直接手动渲染。这个是为了防止瞬间有大量的用户访问才设置的缓存，缓存的有效期不宜过大不宜过小，这里设置的是60秒。太小就会失去缓存左右，太长了用户获得的界面就不是最新的
         // 这里的第二个参数空就行，只需要第一个参数标识就够了
@@ -82,6 +78,12 @@ public class GoodsController {
         if (!StringUtils.isEmpty(html)) {
             return html;
         }
+
+        // 查询商品列表
+        List<GoodsVo> goodsVoList = goodsService.listGoodsVo();
+        model.addAttribute("goodsList", goodsVoList);
+
+        // return "goods_list";
 
         SpringWebContext ctx = new SpringWebContext(request, response, request.getServletContext(), request.getLocale(),
             model.asMap(), applicationContext);

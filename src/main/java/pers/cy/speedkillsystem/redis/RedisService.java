@@ -106,6 +106,29 @@ public class RedisService {
     }
 
     /**
+     * 删除字段
+     * @param prefix
+     * @param key
+     * @return
+     */
+    public boolean delete(KeyPrefix prefix, String key) {
+        // 创建jedis对象，准备从连接池中获取该对象，用来操作redis
+        Jedis jedis = null;
+        // 使用连接池在使用完要将其释放
+        try {
+            // 通过连接池获得jedis对象
+            jedis = jedisPool.getResource();
+            // 生成真正的key
+            String realKey = prefix.getPrefix() + key;
+            long ret = jedis.del(realKey);
+            return ret > 0;
+        } finally {
+            // 释放资源
+            returnToPool(jedis);
+        }
+    }
+
+    /**
      * 将指定key的值增加1
      * @param prefix
      * @param key

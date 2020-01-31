@@ -2,16 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="32e8452f-5bc7-462b-aec3-a67791dd3881" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/MainApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/controller/GoodsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/controller/GoodsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/dao/SksUserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/dao/SksUserDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/redis/RedisService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/redis/RedisService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/redis/SksUserKey.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/redis/SksUserKey.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/service/SksUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/service/SksUserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pers/cy/speedkillsystem/MainApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pers/cy/speedkillsystem/MainApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pers/cy/speedkillsystem/controller/GoodsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pers/cy/speedkillsystem/controller/GoodsController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pers/cy/speedkillsystem/controller/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pers/cy/speedkillsystem/controller/LoginController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/pers/cy/speedkillsystem/service/SksUserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pers/cy/speedkillsystem/service/SksUserService.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -169,7 +165,8 @@
       <workItem from="1580186471584" duration="2741000" />
       <workItem from="1580310032617" duration="2026000" />
       <workItem from="1580356193225" duration="4186000" />
-      <workItem from="1580385433303" duration="5874000" />
+      <workItem from="1580385433303" duration="6367000" />
+      <workItem from="1580442258527" duration="4569000" />
     </task>
     <servers />
   </component>
@@ -189,38 +186,38 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="162" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog/0.0.1536.824@0.0.1536.824" timestamp="1580357611049" />
-    <state width="1493" height="273" key="GridCell.Tab.0.bottom" timestamp="1580398430515">
+    <state width="1493" height="273" key="GridCell.Tab.0.bottom" timestamp="1580399229612">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="273" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1580398430515" />
-    <state width="1493" height="273" key="GridCell.Tab.0.center" timestamp="1580398430515">
+    <state width="1493" height="273" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1580399229612" />
+    <state width="1493" height="273" key="GridCell.Tab.0.center" timestamp="1580399229612">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="273" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1580398430515" />
-    <state width="1493" height="273" key="GridCell.Tab.0.left" timestamp="1580398430515">
+    <state width="1493" height="273" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1580399229612" />
+    <state width="1493" height="273" key="GridCell.Tab.0.left" timestamp="1580399229612">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="273" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1580398430515" />
-    <state width="1493" height="273" key="GridCell.Tab.0.right" timestamp="1580398430515">
+    <state width="1493" height="273" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1580399229612" />
+    <state width="1493" height="273" key="GridCell.Tab.0.right" timestamp="1580399229612">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="273" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1580398430515" />
-    <state width="1493" height="273" key="GridCell.Tab.1.bottom" timestamp="1580398430516">
+    <state width="1493" height="273" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1580399229612" />
+    <state width="1493" height="273" key="GridCell.Tab.1.bottom" timestamp="1580399229612">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="273" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1580398430516" />
-    <state width="1493" height="273" key="GridCell.Tab.1.center" timestamp="1580398430515">
+    <state width="1493" height="273" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1580399229612" />
+    <state width="1493" height="273" key="GridCell.Tab.1.center" timestamp="1580399229612">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="273" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1580398430515" />
-    <state width="1493" height="273" key="GridCell.Tab.1.left" timestamp="1580398430515">
+    <state width="1493" height="273" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1580399229612" />
+    <state width="1493" height="273" key="GridCell.Tab.1.left" timestamp="1580399229612">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="273" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1580398430515" />
-    <state width="1493" height="273" key="GridCell.Tab.1.right" timestamp="1580398430516">
+    <state width="1493" height="273" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1580399229612" />
+    <state width="1493" height="273" key="GridCell.Tab.1.right" timestamp="1580399229612">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="273" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1580398430516" />
+    <state width="1493" height="273" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1580399229612" />
     <state width="1493" height="261" key="GridCell.Tab.2.bottom" timestamp="1580138934306">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -263,7 +260,7 @@
       <breakpoints>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/controller/GoodsController.java</url>
-          <line>130</line>
+          <line>132</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint type="java-line">

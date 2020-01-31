@@ -16,7 +16,13 @@ public class SksUserKey extends BasePrefix{
     }
 
     /**
-     * 获得用户id的key的对象，设置的是永不过期。调用这个getById这个方法的时候，就会返回一个已经设置好prefix的KeyPrefix类型对象
+     * 获得用户token的key的对象，设置的是永不过期。调用这个getById这个方法的时候，就会返回一个已经设置好prefix的KeyPrefix类型对象
      */
     public static SksUserKey token = new SksUserKey(TOKEN_EXPIRE, "tk");
+
+    /**
+     * 获得用户id的key的对象，设置的是永不过期。调用这个getById这个方法的时候，就会返回一个已经设置好prefix的KeyPrefix类型对象
+     */
+    public static SksUserKey getById = new SksUserKey(0, "id");
+
 }
