@@ -45,10 +45,12 @@
 
             </td>
             <td>
-                <form id="miaoshaForm" method="post" action="/speed_kill/do_speed_kill">
-                    <button class="btn btn-primary btn-block" type="submit" id="buyButton">立即秒杀</button>
-                    <input type="hidden" name="goodsId" id="goodsId"/>
-                </form>
+<!--                <form id="miaoshaForm" method="post" action="/speed_kill/do_speed_kill">-->
+<!--                    <button class="btn btn-primary btn-block" type="submit" id="buyButton">立即秒杀</button>-->
+<!--                    <input type="hidden" name="goodsId" id="goodsId"/>-->
+<!--                </form>-->
+                <button class="btn btn-primary btn-block" type="button" id="buyButton" onclick="doSpeedKill()">立即秒杀</button>
+                <input type="hidden" name="goodsId" id="goodsId"/>
             </td>
         </tr>
         <tr>
@@ -68,6 +70,28 @@
 
 </body>
 <script>
+
+    function doSpeedKill() {
+        $.ajax({
+           url:"/speed_kill/do_speed_kill",
+           type:"POST",
+           data:{
+               goodsId: $("#goodsId").val(),
+           },
+            success:function (data) {
+                if (data.code == 0) {
+                    // 访问本地的静态页面
+                    window.location.href = "/order_detail.htm?orderId=" + data.data.id;
+                } else {
+                    layer.msg(data.msg);
+                }
+            },
+            error:function () {
+                layer.msg("客户端请求有误");
+            }
+        });
+
+    }
 
     /**
      * 渲染页面 将变量加载入界面
@@ -117,7 +141,7 @@
         $.ajax({
            url:"/goods/detail/" + goodsId,
            type:"GET",
-            success:function (data) {
+           success:function (data) {
                 if (data.code == 0) {
                     // 自行渲染界面，将从服务器发过来的商品信息对象中的数据填充到本地的静态界面中
                     render(data.data)
@@ -125,9 +149,9 @@
                     layer.msg(data.msg);
                 }
             },
-            error:function () {
+           error:function () {
                 layer.msg("客户端请求有误");
-            }
+           }
         });
     }
 

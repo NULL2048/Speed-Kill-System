@@ -3,12 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="32e8452f-5bc7-462b-aec3-a67791dd3881" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/controller/GoodsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/controller/GoodsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/service/SksUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/service/SksUserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/common.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/common.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/goods_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/goods_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pers/cy/speedkillsystem/controller/GoodsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pers/cy/speedkillsystem/controller/GoodsController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pers/cy/speedkillsystem/service/SksUserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pers/cy/speedkillsystem/service/SksUserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/controller/SpeedKillController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/controller/SpeedKillController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/goods_detail.htm" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/goods_detail.htm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pers/cy/speedkillsystem/controller/SpeedKillController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pers/cy/speedkillsystem/controller/SpeedKillController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -166,7 +164,7 @@
       <workItem from="1580310032617" duration="2026000" />
       <workItem from="1580356193225" duration="4186000" />
       <workItem from="1580385433303" duration="6367000" />
-      <workItem from="1580442258527" duration="11684000" />
+      <workItem from="1580442258527" duration="18087000" />
     </task>
     <servers />
   </component>
@@ -186,38 +184,38 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="162" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog/0.0.1536.824@0.0.1536.824" timestamp="1580357611049" />
-    <state width="1493" height="2" key="GridCell.Tab.0.bottom" timestamp="1580464344367">
+    <state width="1493" height="2" key="GridCell.Tab.0.bottom" timestamp="1580470107227">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="2" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1580464344367" />
-    <state width="1493" height="2" key="GridCell.Tab.0.center" timestamp="1580464344367">
+    <state width="1493" height="2" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1580470107227" />
+    <state width="1493" height="2" key="GridCell.Tab.0.center" timestamp="1580470107227">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="2" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1580464344367" />
-    <state width="1493" height="2" key="GridCell.Tab.0.left" timestamp="1580464344367">
+    <state width="1493" height="2" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1580470107227" />
+    <state width="1493" height="2" key="GridCell.Tab.0.left" timestamp="1580470107226">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="2" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1580464344367" />
-    <state width="1493" height="2" key="GridCell.Tab.0.right" timestamp="1580464344367">
+    <state width="1493" height="2" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1580470107226" />
+    <state width="1493" height="2" key="GridCell.Tab.0.right" timestamp="1580470107227">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="2" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1580464344367" />
-    <state width="1493" height="2" key="GridCell.Tab.1.bottom" timestamp="1580464344367">
+    <state width="1493" height="2" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1580470107227" />
+    <state width="1493" height="2" key="GridCell.Tab.1.bottom" timestamp="1580470107230">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="2" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1580464344367" />
-    <state width="1493" height="2" key="GridCell.Tab.1.center" timestamp="1580464344367">
+    <state width="1493" height="2" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1580470107230" />
+    <state width="1493" height="2" key="GridCell.Tab.1.center" timestamp="1580470107229">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="2" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1580464344367" />
-    <state width="1493" height="2" key="GridCell.Tab.1.left" timestamp="1580464344367">
+    <state width="1493" height="2" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1580470107229" />
+    <state width="1493" height="2" key="GridCell.Tab.1.left" timestamp="1580470107227">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="2" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1580464344367" />
-    <state width="1493" height="2" key="GridCell.Tab.1.right" timestamp="1580464344367">
+    <state width="1493" height="2" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1580470107227" />
+    <state width="1493" height="2" key="GridCell.Tab.1.right" timestamp="1580470107230">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="2" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1580464344367" />
+    <state width="1493" height="2" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1580470107230" />
     <state width="1493" height="261" key="GridCell.Tab.2.bottom" timestamp="1580138934306">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -250,10 +248,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="190" y="133" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1579744752123" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1580455407065">
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1580465553314">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1580455407065" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1580465553314" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -267,11 +265,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/service/GoodsService.java</url>
           <line>39</line>
           <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/service/SpeedKillService.java</url>
-          <line>34</line>
-          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
