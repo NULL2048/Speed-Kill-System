@@ -30,7 +30,9 @@
             <td th:text="${goods.goodsPrice}"></td>
             <td th:text="${goods.sksPrice}"></td>
             <td th:text="${goods.stockCount}"></td>
-            <td><a th:href="'/goods/to_detail/'+${goods.id}">详情</a></td>
+            <!--因为商品详情页做了页面静态化，所以下面的跳转不能通过服务端的controller跳转了，而是直接访问存在本地的静态资源，静态资源都放在static文件夹下-->
+            <!--存在静态资源的页面后缀要改一下，否则系统还是默认去找template目录下的页面-->
+            <td><a th:href="'/goods_detail.htm?goodsId='+${goods.id}">详情</a></td>
         </tr>
     </table>
 </div>

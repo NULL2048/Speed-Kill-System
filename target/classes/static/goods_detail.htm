@@ -1,0 +1,178 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>商品详情</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!-- jquery -->
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <!-- bootstrap -->
+    <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css"/>
+    <script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
+    <!-- jquery-validator -->
+    <script type="text/javascript" src="/jquery-validation/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="/jquery-validation/localization/messages_zh.min.js"></script>
+    <!-- layer -->
+    <script type="text/javascript" src="/layer/layer.js"></script>
+    <!-- md5.js -->
+    <script type="text/javascript" src="/js/md5.min.js"></script>
+    <!-- common.js -->
+    <script type="text/javascript" src="/js/common.js"></script>
+</head>
+<body>
+<div class="panel panel-default">
+    <div class="panel-heading">秒杀商品详情</div>
+    <div class="panel-body">
+        <span id="userTip"> 您还没有登录，请登陆后再操作<br/></span>
+        <span>没有收货地址的提示。。。</span>
+    </div>
+    <table class="table" id="goodslist">
+        <tr>
+            <td>商品名称</td>
+            <td colspan="3" id="goodsName"></td>
+        </tr>
+        <tr>
+            <td>商品图片</td>
+            <td colspan="3"><img id="goodsImg" width="200" height="200" /></td>
+        </tr>
+        <tr>
+            <td>秒杀开始时间</td>
+            <td id="startTime"></td>
+            <td>
+                <!--要用一个隐藏标签，因为前端不能对后端传过来的数据进行修改，所以只能先把后端的数据赋值给前端的标签value，然后对value进行修改，下面的span标签中读取这个隐藏标签的值-->
+                <input type="hidden" id="remainSeconds"/>
+                <span id="miaoshaTip"></span>
+
+            </td>
+            <td>
+                <form id="miaoshaForm" method="post" action="/speed_kill/do_speed_kill">
+                    <button class="btn btn-primary btn-block" type="submit" id="buyButton">立即秒杀</button>
+                    <input type="hidden" name="goodsId" id="goodsId"/>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>商品原价</td>
+            <td colspan="3" id="goodsPrice"></td>
+        </tr>
+        <tr>
+            <td>秒杀价</td>
+            <td colspan="3" id="speedKillPrice"></td>
+        </tr>
+        <tr>
+            <td>库存数量</td>
+            <td colspan="3" id="stockCount"></td>
+        </tr>
+    </table>
+</div>
+
+</body>
+<script>
+
+    /**
+     * 渲染页面 将变量加载入界面
+     * @param detail
+     */
+    function render(detail) {
+        // 秒杀状态
+        var speedKillStatus = detail.speedKillStatus;
+        // 还剩多少秒秒杀开始
+        var remainSeconds = detail.remainSeconds;
+        // 商品
+        var goods = detail.goods;
+        // 用户
+        var user = detail.user;
+
+        // 如果已登录则将未登录提示隐藏
+        if (user) {
+            $("#userTip").hide();
+        }
+
+        // 将数据填充到界面
+        $("#goodsName").text(goods.goodsName);
+        $("#goodsImg").attr("src", goods.goodsImg);
+        $("#startTime").text(new Date(goods.startDate).format("yyyy-MM-dd hh:mm:ss"));
+        $("#remainSeconds").val(remainSeconds);
+        $("#goodsId").val(goods.id);
+        $("#goodsPrice").text(goods.goodsPrice);
+        $("#speedKillPrice").text(goods.speedKillPrice);
+        $("#stockCount").text(goods.stockCount);
+
+        // 开始倒计时
+        countDown();
+
+    }
+
+    // 表示初始化以后就开始从服务端取出商品详情页
+    $(function () {
+        getDetail();
+    });
+
+    /**
+     * 异步请求获取商品详情页，自行进行渲染
+     */
+    function getDetail() {
+        // 获取地址中携带的参数
+        var goodsId = g_getQueryString("goodsId")
+        $.ajax({
+           url:"/goods/detail/" + goodsId,
+           type:"GET",
+            success:function (data) {
+                if (data.code == 0) {
+                    render(data.data)
+                } else {
+                    layer.msg(data.msg);
+                }
+            },
+            error:function () {
+                layer.msg("客户端请求有误");
+            }
+        });
+    }
+
+
+    //将时间减1
+    function countDown() {
+        // 取得隐藏标签的值
+        var remainSeconds = $("#remainSeconds").val();
+        // 存储定时器id
+        var timeout;
+
+        // 秒杀还没开始，倒计时
+        if (remainSeconds > 0) {
+            // 秒杀按钮不可点
+            $("#buyButton").attr("disabled", true);
+            $("#miaoshaTip").html("秒杀倒计时：" + remainSeconds + "秒")
+
+            // setTimeout的返回值是定时器id
+            timeout = setTimeout(function () {
+                // 将页面显示的秒数减一
+                $("#countDown").text(remainSeconds - 1);
+                // 更新隐藏标签的值
+                $("#remainSeconds").val(remainSeconds - 1);
+                // 重新调用这个方法
+                countDown();
+            },1000);
+
+
+        // 秒杀进行中
+        } else if (remainSeconds == 0) {
+            // 秒杀按钮可点
+            $("#buyButton").attr("disabled", false);
+
+            if (timeout) {
+                // 如果timeout有值的话就停止该定时器id对应的定时器
+                clearTimeout(timeout);
+            }
+            $("#miaoshaTip").html("秒杀进行中");
+
+        // 秒杀已经结束
+        } else {
+            // 秒杀按钮不可点
+            $("#buyButton").attr("disabled", true);
+            $("#miaoshaTip").html("秒杀已经结束");
+
+        }
+    }
+</script>
+</html>

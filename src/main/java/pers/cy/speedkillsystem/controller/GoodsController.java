@@ -13,8 +13,10 @@ import pers.cy.speedkillsystem.domain.SksUser;
 import pers.cy.speedkillsystem.domain.User;
 import pers.cy.speedkillsystem.redis.GoodsKey;
 import pers.cy.speedkillsystem.redis.RedisService;
+import pers.cy.speedkillsystem.result.Result;
 import pers.cy.speedkillsystem.service.GoodsService;
 import pers.cy.speedkillsystem.service.SksUserService;
+import pers.cy.speedkillsystem.vo.GoodsDetailVo;
 import pers.cy.speedkillsystem.vo.GoodsVo;
 
 import javax.servlet.http.HttpServletRequest;
@@ -108,9 +110,9 @@ public class GoodsController {
      * @param request
      * @return
      */
-    @RequestMapping(value = "/to_detail/{goodsId}", produces = "text/html")
+    @RequestMapping(value = "/to_detail2/{goodsId}", produces = "text/html")
     @ResponseBody
-    public String detail(Model model, SksUser user, @PathVariable("goodsId") long goodsId,
+    public String detail2(Model model, SksUser user, @PathVariable("goodsId") long goodsId,
         HttpServletResponse response, HttpServletRequest request){
         model.addAttribute("user", user);
 
@@ -160,5 +162,58 @@ public class GoodsController {
             redisService.set(GoodsKey.getGoodsDetail, "" + goodsId, html);
         }
         return html;
+    }
+
+    /**
+     * 商品详情页
+     * 实现页面静态化，因为商品详情页相对复杂，所以对他进行页面静态化
+     * 页面静态化就是静态资源都存在页面，这个方法只返回页面中需要的动态信息对象就可以了
+     * @param model
+     * @param user
+     * @param goodsId
+     * @param response
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/detail/{goodsId}")
+    @ResponseBody
+    public Result<GoodsDetailVo> detail(Model model, SksUser user, @PathVariable("goodsId") long goodsId,
+                                        HttpServletResponse response, HttpServletRequest request){
+
+        // 获取商品详细信息
+        GoodsVo goods = goodsService.getGoodsVoByGoodsId(goodsId);
+
+        // 获取秒杀时间  单位毫秒
+        long startAt = goods.getStartDate().getTime();
+        long endAt = goods.getEndDate().getTime();
+        long now = System.currentTimeMillis();
+
+        // 秒杀状态
+        int speedKillStatus = 0;
+        // 还剩多少秒秒杀开始
+        int remainSeconds = 0;
+
+        // 秒杀还未开始，倒计时
+        if (now < startAt) {
+            speedKillStatus = 0;
+            remainSeconds = (int) (startAt - now) / 1000;
+            // 秒杀已经结束
+        } else if (now > endAt) {
+            speedKillStatus = 2;
+            remainSeconds = -1;
+            // 秒杀进行中
+        } else {
+            speedKillStatus = 1;
+            remainSeconds = 0;
+        }
+
+        // 将页面的动态信息放入vo对象中，准备传给客户端页面
+        GoodsDetailVo vo = new GoodsDetailVo();
+        vo.setGoods(goods);
+        vo.setUser(user);
+        vo.setRemainSeconds(remainSeconds);
+        vo.setSpeedKillStatus(speedKillStatus);
+
+        return Result.success(vo);
     }
 }

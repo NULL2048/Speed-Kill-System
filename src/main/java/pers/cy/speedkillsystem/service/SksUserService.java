@@ -62,12 +62,14 @@ public class SksUserService {
         if (user == null) {
             throw new GlobalException(CodeMsg.MOBILE_NOT_EXIST);
         }
-        // 更新数据库
+
+        // 更新数据库  要先更新数据库，再更新缓存，这样才能保证缓存和数据库的一致性
         SksUser toBeUpdate = new SksUser();
         toBeUpdate.setId(id);
         toBeUpdate.setPassword(MD5Util.formPassToDBPass(formPass, user.getSalt()));
         // 这里之所以单独创建一个user对象，更新传参的时候相当于只穿两个参数id和password进去，这样在执行sql的时候效率比直接创建一个新的user对象，把所有的属性都更新一遍地sql效率要高，这也是一个提高sql执行效率地小技巧
         sksUserDao.update(toBeUpdate);
+
         // 更新缓存  修改完db就要也一起更新缓存数据，否则会造成数据库和缓存不一致
         // 将用户信息的缓存删掉
         redisService.delete(SksUserKey.getById, "" + id);
