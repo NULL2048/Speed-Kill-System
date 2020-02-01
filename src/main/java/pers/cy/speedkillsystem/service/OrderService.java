@@ -8,6 +8,8 @@ import pers.cy.speedkillsystem.dao.OrderDao;
 import pers.cy.speedkillsystem.domain.OrderInfo;
 import pers.cy.speedkillsystem.domain.SksOrder;
 import pers.cy.speedkillsystem.domain.SksUser;
+import pers.cy.speedkillsystem.redis.OrderKey;
+import pers.cy.speedkillsystem.redis.RedisService;
 import pers.cy.speedkillsystem.vo.GoodsVo;
 
 import java.util.Date;
@@ -18,14 +20,19 @@ public class OrderService {
     @Autowired
     private OrderDao orderDao;
 
+    @Autowired
+    private RedisService redisService;
+
     /**
-     * 通过用户ID和商品ID获得秒杀订单
+     * 通过用户ID和商品ID获得秒杀订单  可以用来判断是否已经秒杀
      * @param userId
      * @param goodsId
      * @return
      */
     public SksOrder getSpeedKillOrderByUserIdGoodsId(long userId, long goodsId) {
-        return orderDao.getSpeedKillOrderByUserIdGoodsId(userId, goodsId);
+        // return orderDao.getSpeedKillOrderByUserIdGoodsId(userId, goodsId);
+        // 查缓存中有没有
+        return redisService.get(OrderKey.getSpeedKillOrderByUidGid, "" + userId + "_" + goodsId, SksOrder.class);
     }
 
     /**
@@ -57,7 +64,11 @@ public class OrderService {
         sksOrder.setOrderId(orderId);
         sksOrder.setUserId(user.getId());
 
+        // 写入数据库
         orderDao.insertSksOrder(sksOrder);
+
+        // 写入缓存，方便下次直接从缓存查找
+        redisService.set(OrderKey.getSpeedKillOrderByUidGid, "" + user.getId() + "_" + goods.getId(), sksOrder);
 
         // 返回商品订单
         return orderInfo;

@@ -3,11 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="32e8452f-5bc7-462b-aec3-a67791dd3881" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/dao/OrderDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/dao/OrderDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/result/CodeMsg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/result/CodeMsg.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/controller/SpeedKillController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/controller/SpeedKillController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/dao/GoodsDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/dao/GoodsDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/redis/OrderKey.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/redis/OrderKey.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/service/OrderService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/goods_detail.htm" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/goods_detail.htm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/order_detail.htm" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/order_detail.htm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pers/cy/speedkillsystem/controller/SpeedKillController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pers/cy/speedkillsystem/controller/SpeedKillController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pers/cy/speedkillsystem/service/OrderService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pers/cy/speedkillsystem/service/OrderService.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +83,7 @@
       <recent name="C:\我的电脑\文档\开发项目\秒杀系统\Speed-Kill-System\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.MainApplication">
+  <component name="RunManager" selected="Application.UserUtil">
     <configuration name="MD5Util" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="pers.cy.speedkillsystem.util.MD5Util" />
       <module name="Speed-Kill-System" />
@@ -137,8 +138,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Spring Boot.MainApplication" />
         <item itemvalue="Application.UserUtil" />
+        <item itemvalue="Spring Boot.MainApplication" />
         <item itemvalue="Application.ValidatorUtil" />
         <item itemvalue="Application.MD5Util" />
       </list>
@@ -167,7 +168,7 @@
       <workItem from="1580385433303" duration="6367000" />
       <workItem from="1580442258527" duration="18233000" />
       <workItem from="1580528340361" duration="28000" />
-      <workItem from="1580528402747" duration="2373000" />
+      <workItem from="1580528402747" duration="9021000" />
     </task>
     <servers />
   </component>
@@ -187,38 +188,38 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="162" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog/0.0.1536.824@0.0.1536.824" timestamp="1580357611049" />
-    <state width="1493" height="2" key="GridCell.Tab.0.bottom" timestamp="1580472131757">
+    <state width="1493" height="378" key="GridCell.Tab.0.bottom" timestamp="1580542337410">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="2" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1580472131757" />
-    <state width="1493" height="2" key="GridCell.Tab.0.center" timestamp="1580472131757">
+    <state width="1493" height="378" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1580542337410" />
+    <state width="1493" height="378" key="GridCell.Tab.0.center" timestamp="1580542337410">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="2" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1580472131757" />
-    <state width="1493" height="2" key="GridCell.Tab.0.left" timestamp="1580472131757">
+    <state width="1493" height="378" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1580542337410" />
+    <state width="1493" height="378" key="GridCell.Tab.0.left" timestamp="1580542337410">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="2" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1580472131757" />
-    <state width="1493" height="2" key="GridCell.Tab.0.right" timestamp="1580472131757">
+    <state width="1493" height="378" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1580542337410" />
+    <state width="1493" height="378" key="GridCell.Tab.0.right" timestamp="1580542337410">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="2" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1580472131757" />
-    <state width="1493" height="2" key="GridCell.Tab.1.bottom" timestamp="1580472131757">
+    <state width="1493" height="378" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1580542337410" />
+    <state width="1493" height="378" key="GridCell.Tab.1.bottom" timestamp="1580542264076">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="2" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1580472131757" />
-    <state width="1493" height="2" key="GridCell.Tab.1.center" timestamp="1580472131757">
+    <state width="1493" height="378" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1580542264076" />
+    <state width="1493" height="378" key="GridCell.Tab.1.center" timestamp="1580542264076">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="2" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1580472131757" />
-    <state width="1493" height="2" key="GridCell.Tab.1.left" timestamp="1580472131757">
+    <state width="1493" height="378" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1580542264076" />
+    <state width="1493" height="378" key="GridCell.Tab.1.left" timestamp="1580542264076">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="2" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1580472131757" />
-    <state width="1493" height="2" key="GridCell.Tab.1.right" timestamp="1580472131757">
+    <state width="1493" height="378" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1580542264076" />
+    <state width="1493" height="378" key="GridCell.Tab.1.right" timestamp="1580542264076">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="2" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1580472131757" />
+    <state width="1493" height="378" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1580542264076" />
     <state width="1493" height="261" key="GridCell.Tab.2.bottom" timestamp="1580138934306">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -251,10 +252,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="190" y="133" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1579744752123" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1580465553314">
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1580540300176">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1580465553314" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1580540300176" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
