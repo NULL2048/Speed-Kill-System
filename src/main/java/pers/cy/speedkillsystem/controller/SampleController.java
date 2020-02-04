@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pers.cy.speedkillsystem.domain.User;
+import pers.cy.speedkillsystem.rabbitmq.MQSender;
 import pers.cy.speedkillsystem.redis.RedisService;
 import pers.cy.speedkillsystem.redis.UserKey;
 import pers.cy.speedkillsystem.result.CodeMsg;
@@ -21,6 +22,9 @@ public class SampleController {
     @Autowired
     private RedisService redisService;
 
+    @Autowired
+    private MQSender mqSender;
+
     @RequestMapping("/thymeleaf")
     public String thymeleaf(Model model) {
         model.addAttribute("name", "cy");
@@ -33,6 +37,34 @@ public class SampleController {
     public Result<String> hello() {
         return Result.success("hello world");
         // return new Result(0, "success", "hello world");
+    }
+
+    @RequestMapping("/mq")
+    @ResponseBody
+    public Result<String> mq() {
+        mqSender.send("hello");
+        return Result.success("hello world");
+    }
+
+    @RequestMapping("/mq/topic")
+    @ResponseBody
+    public Result<String> topic() {
+        mqSender.sendTopic("hello");
+        return Result.success("hello world");
+    }
+
+    @RequestMapping("/mq/fanout")
+    @ResponseBody
+    public Result<String> fanout() {
+        mqSender.sendFanout("hello");
+        return Result.success("hello world");
+    }
+
+    @RequestMapping("/mq/header")
+    @ResponseBody
+    public Result<String> header() {
+        mqSender.sendHeader("hello");
+        return Result.success("hello world");
     }
 
     @RequestMapping("/helloError")

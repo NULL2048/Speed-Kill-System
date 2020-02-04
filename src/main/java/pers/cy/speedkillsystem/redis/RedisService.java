@@ -180,7 +180,7 @@ public class RedisService {
      * @param <T> 要转换的对象的类型
      * @return 转换完成的String对象
      */
-    private <T> String beanToString(T value) {
+    public static <T> String beanToString(T value) {
         // 对值判空
         if (value == null) {
             return null;
@@ -208,7 +208,7 @@ public class RedisService {
      * @param <T> 要转换成的类型
      * @return 转换完成的对象
      */
-    private <T> T stringToBean(String str, Class<T> clazz) {
+    public static <T> T stringToBean(String str, Class<T> clazz) {
         // 数据非法判断
         if (str == null || str.length() <= 0 || clazz == null) {
             return null;
