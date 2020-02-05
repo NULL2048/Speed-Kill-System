@@ -1,5 +1,6 @@
 package pers.cy.speedkillsystem.controller;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +23,9 @@ import pers.cy.speedkillsystem.service.OrderService;
 import pers.cy.speedkillsystem.service.SpeedKillService;
 import pers.cy.speedkillsystem.vo.GoodsVo;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/speed_kill")
@@ -42,6 +45,9 @@ public class SpeedKillController implements InitializingBean {
     @Autowired
     private MQSender sender;
 
+    // 商品售空标记
+    private Map<Long, Boolean> localOverMap = new HashMap<Long, Boolean>();
+
     /**
      * 实现InitializingBean接口之后，在系统初始化会先自动调用这个方法
      * 在系统初始化的时候先将库存预加载入redis缓存
@@ -56,6 +62,8 @@ public class SpeedKillController implements InitializingBean {
         // 将商品库存加载入缓存
         for (GoodsVo goods : goodsList) {
             redisService.set(GoodsKey.getSpeedKillGoodsStock, "" + goods.getId(), goods.getStockCount());
+            // 初始化阶段先将所有商品标记为没有售空
+            localOverMap.put(goods.getId(), false);
         }
     }
 
@@ -86,10 +94,20 @@ public class SpeedKillController implements InitializingBean {
             return Result.error(CodeMsg.SESSION_ERROR);
         }
 
+        // 先查询该商品是否已经无库存，如果无库存直接返回失败，就不要再预减库存了
+        // 如果不做这一步判断，那么预减库存有可能变成负数，当变为负数后这么一直访问redis是没有意义的，后面也肯定创建不了订单，还会白白占用redis资源，有网络消耗
+        // 所以使用hashMap直接在本地内存存储该商品是否已经售空的标识来避免这一问题
+        boolean over = localOverMap.get(goodsId);
+        if (over) {
+            return Result.error(CodeMsg.SPEED_KILL_OVER);
+        }
+
         // 预减库存
         Long stock = redisService.decr(GoodsKey.getSpeedKillGoodsStock, "" + goodsId);
         // 如果库存已经小于零直接返回失败
         if (stock < 0) {
+            // 如果该商品的库存已经没有了，将该商品id标记为已经无库存
+            localOverMap.put(goodsId, true);
             return Result.error(CodeMsg.SPEED_KILL_OVER);
         }
 

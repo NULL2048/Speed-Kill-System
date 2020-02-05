@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="32e8452f-5bc7-462b-aec3-a67791dd3881" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/common.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/common.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/controller/SpeedKillController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pers/cy/speedkillsystem/controller/SpeedKillController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,7 +171,7 @@
       <workItem from="1580786801331" duration="4100000" />
       <workItem from="1580808985632" duration="10011000" />
       <workItem from="1580872772529" duration="68000" />
-      <workItem from="1580872856050" duration="6874000" />
+      <workItem from="1580872856050" duration="8351000" />
     </task>
     <servers />
   </component>
