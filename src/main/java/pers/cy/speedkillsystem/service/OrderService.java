@@ -56,12 +56,12 @@ public class OrderService {
         // 订单状态，0新建未支付，1已支付，2已发货，3已收货，4已退款，5已完成
         orderInfo.setStatus(0);
         orderInfo.setUserId(user.getId());
-        long orderId = orderDao.insertOrder(orderInfo);
+        orderDao.insertOrder(orderInfo);
 
         // 创建秒杀订单
         SksOrder sksOrder = new SksOrder();
         sksOrder.setGoodsId(goods.getId());
-        sksOrder.setOrderId(orderId);
+        sksOrder.setOrderId(orderInfo.getId());
         sksOrder.setUserId(user.getId());
 
         // 写入数据库

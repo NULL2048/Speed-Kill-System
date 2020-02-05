@@ -1,5 +1,6 @@
 package pers.cy.speedkillsystem.controller;
 
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +11,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import pers.cy.speedkillsystem.domain.OrderInfo;
 import pers.cy.speedkillsystem.domain.SksOrder;
 import pers.cy.speedkillsystem.domain.SksUser;
+import pers.cy.speedkillsystem.rabbitmq.MQSender;
+import pers.cy.speedkillsystem.rabbitmq.SpeedKillMessage;
+import pers.cy.speedkillsystem.redis.GoodsKey;
+import pers.cy.speedkillsystem.redis.RedisService;
 import pers.cy.speedkillsystem.result.CodeMsg;
 import pers.cy.speedkillsystem.result.Result;
 import pers.cy.speedkillsystem.service.GoodsService;
@@ -17,9 +22,11 @@ import pers.cy.speedkillsystem.service.OrderService;
 import pers.cy.speedkillsystem.service.SpeedKillService;
 import pers.cy.speedkillsystem.vo.GoodsVo;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/speed_kill")
-public class SpeedKillController {
+public class SpeedKillController implements InitializingBean {
     @Autowired
     private GoodsService goodsService;
 
@@ -28,6 +35,29 @@ public class SpeedKillController {
 
     @Autowired
     private SpeedKillService speedKillService;
+
+    @Autowired
+    private RedisService redisService;
+
+    @Autowired
+    private MQSender sender;
+
+    /**
+     * 实现InitializingBean接口之后，在系统初始化会先自动调用这个方法
+     * 在系统初始化的时候先将库存预加载入redis缓存
+     * @throws Exception
+     */
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        List<GoodsVo> goodsList = goodsService.listGoodsVo();
+        if (goodsList == null) {
+            return;
+        }
+        // 将商品库存加载入缓存
+        for (GoodsVo goods : goodsList) {
+            redisService.set(GoodsKey.getSpeedKillGoodsStock, "" + goods.getId(), goods.getStockCount());
+        }
+    }
 
     /**
      * 秒杀操作
@@ -49,13 +79,39 @@ public class SpeedKillController {
      */
     @RequestMapping(value = "/do_speed_kill", method = RequestMethod.POST)
     @ResponseBody
-    public Result<OrderInfo> speedKill(Model model, SksUser user, @RequestParam("goodsId") long goodsId) {
+    public Result<Integer> speedKill(Model model, SksUser user, @RequestParam("goodsId") long goodsId) {
         model.addAttribute("user", user);
         if (user == null) {
             // 用户session失效
             return Result.error(CodeMsg.SESSION_ERROR);
         }
 
+        // 预减库存
+        Long stock = redisService.decr(GoodsKey.getSpeedKillGoodsStock, "" + goodsId);
+        // 如果库存已经小于零直接返回失败
+        if (stock < 0) {
+            return Result.error(CodeMsg.SPEED_KILL_OVER);
+        }
+
+        // 判断用户是否已经秒杀过了，防止用户多次秒杀
+        SksOrder order = oderService.getSpeedKillOrderByUserIdGoodsId(user.getId(), goodsId);
+        if (order != null) {
+            // 不能重复秒杀
+            return Result.error(CodeMsg.REPEATE_SPEED_KILL);
+        }
+
+        // 入队,异步下单  同时客户端进行轮询
+        // 创建订单消息对象
+        SpeedKillMessage skMsg = new SpeedKillMessage();
+        skMsg.setUser(user);
+        skMsg.setGoodsId(goodsId);
+        sender.sendSpeedKillMessage(skMsg);
+
+        // 返回0，表示排队中
+        return Result.success(0);
+
+        //
+        /*
         // 判断库存
         GoodsVo goods = goodsService.getGoodsVoByGoodsId(goodsId);
         int stock = goods.getStockCount();
@@ -76,6 +132,26 @@ public class SpeedKillController {
 
         // 将订单数据返回
         return Result.success(orderInfo);
+         */
     }
 
+    /**
+     * 查询订单是否创建成功
+     * @param model
+     * @param user
+     * @param goodsId
+     * @return  返回orderId表示下单成功  返回-1表示库存不足，下单失败   0：排队中
+     */
+    @RequestMapping(value = "/result", method = RequestMethod.GET)
+    @ResponseBody
+    public Result<Long> speedKillResult(Model model, SksUser user, @RequestParam("goodsId") long goodsId) {
+        model.addAttribute("user", user);
+        if (user == null) {
+            // 用户session失效
+            return Result.error(CodeMsg.SESSION_ERROR);
+        }
+
+        long result = speedKillService.getSpeedKillResult(user.getId(), goodsId);
+        return Result.success(result);
+    }
 }

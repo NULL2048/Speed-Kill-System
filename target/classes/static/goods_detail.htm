@@ -70,6 +70,44 @@
 
 </body>
 <script>
+    function getSpeedKillResult(goodsId) {
+        g_showLoading();
+        $.ajax({
+            url:"/speed_kill/result",
+            type:"GET",
+            data:{
+                goodsId: $("#goodsId").val(),
+            },
+            success:function (data) {
+                if (data.code == 0) {
+                    var result = data.data;
+                    if (result < 0) {
+                        layer.msg("对不起，秒杀失败");
+                    } else if (result == 0) {
+                        // 继续轮询  间隔50毫秒循环调用
+                        setTimeout(function () {
+                            getSpeedKillResult(goodsId)
+                        }, 50);
+                    } else {
+                        layer.confirm("恭喜你，秒杀成功！查看订单？", {btn:["确定","取消"]},
+                        function () {
+                            // 访问本地的静态页面,查看订单详情
+                            window.location.href = "/order_detail.htm?orderId=" + result;
+                        },
+                        function () {
+                            // 关掉弹窗
+                            layer.closeAll();
+                        });
+                    }
+                } else {
+                    layer.msg(data.msg);
+                }
+            },
+            error:function () {
+                layer.msg("客户端请求有误");
+            }
+        });
+    }
 
     // 异步请求秒杀操作
     function doSpeedKill() {
@@ -81,8 +119,8 @@
            },
             success:function (data) {
                 if (data.code == 0) {
-                    // 访问本地的静态页面
-                    window.location.href = "/order_detail.htm?orderId=" + data.data.id;
+                    // 异步下单请求成功后客户端轮询订单创建情况
+                    getSpeedKillResult($("#goodsId").val());
                 } else {
                     layer.msg(data.msg);
                 }

@@ -14,6 +14,7 @@ import java.util.Map;
 public class MQConfig {
 
     // 指定消息队列的名字
+    public static final String SPEED_KILL_QUEUE = "sk.queue";
     public static final String QUEUE = "queue";
     public static final String TOPIC_QUEUE1 = "topic.queue1";
     public static final String TOPIC_QUEUE2 = "topic.queue2";
@@ -37,7 +38,7 @@ public class MQConfig {
     @Bean
     public Queue queue() {
         // true表示是否要做优化
-        return new Queue(QUEUE, true);
+        return new Queue(SPEED_KILL_QUEUE, true);
     }
 
     /**

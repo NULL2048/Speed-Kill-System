@@ -21,6 +21,21 @@ public class MQSender {
     @Autowired
     private AmqpTemplate amqpTemplate;
 
+    /**
+     * 下单消息发送
+     * @param skMsg
+     */
+    public void sendSpeedKillMessage(SpeedKillMessage skMsg) {
+        // 将消息对象转换成String
+        String msg = RedisService.beanToString(skMsg);
+        logger.info("send message:" + msg);
+        // 将消息发送到指定的消息队列中
+        amqpTemplate.convertAndSend(MQConfig.SPEED_KILL_QUEUE, msg);
+    }
+
+
+
+    /*
     public void send(Object message) {
         // 将消息对象转换成String
         String msg = RedisService.beanToString(message);
@@ -60,4 +75,7 @@ public class MQSender {
         // 将消息发送到指定的消息队列中  不需要key参数了，但是还是要传参一个""空字符串
         amqpTemplate.convertAndSend(MQConfig.HEADERS_EXCHANGE, "", obj);
     }
+     */
+
+
 }

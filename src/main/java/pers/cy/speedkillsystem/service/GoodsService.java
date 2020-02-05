@@ -35,9 +35,10 @@ public class GoodsService {
      * 减少商品库存
      * @param goods
      */
-    public void reduceStock(GoodsVo goods) {
+    public boolean reduceStock(GoodsVo goods) {
         SksGoods g = new SksGoods();
         g.setGoodsId(goods.getId());
-        goodsDao.reduceStock(g);
+        int ret = goodsDao.reduceStock(g);
+        return ret > 0;
     }
 }
