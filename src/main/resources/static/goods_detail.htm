@@ -49,7 +49,7 @@
 <!--                    <button class="btn btn-primary btn-block" type="submit" id="buyButton">立即秒杀</button>-->
 <!--                    <input type="hidden" name="goodsId" id="goodsId"/>-->
 <!--                </form>-->
-                <button class="btn btn-primary btn-block" type="button" id="buyButton" onclick="doSpeedKill()">立即秒杀</button>
+                <button class="btn btn-primary btn-block" type="button" id="buyButton" onclick="getSpeedKillPath()">立即秒杀</button>
                 <input type="hidden" name="goodsId" id="goodsId"/>
             </td>
         </tr>
@@ -70,6 +70,48 @@
 
 </body>
 <script>
+    function getSpeedKillPath() {
+        var goodsId = $("#goodsId").val();
+        g_showLoading();
+
+        $.ajax({
+            url:"/speed_kill/path",
+            type:"GET",
+            data:{
+                goodsId:goodsId,
+            },
+            success:function(data){
+                if(data.code == 0){
+                    var path = data.data;
+                    doSpeedKill(path);
+                }else{
+                    layer.msg(data.msg);
+                }
+            },
+            error:function(){
+                layer.msg("客户端请求有误");
+            }
+        });
+        // $.ajax({
+        //     url:"/speed_kill/path",
+        //     type:"GET",
+        //     data:{
+        //         goodsId: goodsId,
+        //     },
+        //     success:function (data) {
+        //         if (data.code == 0) {
+        //             var path = data.data;
+        //             doSpeedKill(path);
+        //         } else {
+        //             layer.msg(data.msg);
+        //         }
+        //     },
+        //     error:function () {
+        //         layer.msg("客户端请求有误");
+        //     }
+        // });
+    }
+
     function getSpeedKillResult(goodsId) {
         g_showLoading();
         $.ajax({
@@ -87,7 +129,7 @@
                         // 继续轮询  间隔50毫秒循环调用
                         setTimeout(function () {
                             getSpeedKillResult(goodsId)
-                        }, 50);
+                        }, 200);
                     } else {
                         layer.confirm("恭喜你，秒杀成功！查看订单？", {btn:["确定","取消"]},
                         function () {
@@ -110,9 +152,9 @@
     }
 
     // 异步请求秒杀操作
-    function doSpeedKill() {
+    function doSpeedKill(path) {
         $.ajax({
-           url:"/speed_kill/do_speed_kill",
+           url:"/speed_kill/" + path + "/do_speed_kill",
            type:"POST",
            data:{
                goodsId: $("#goodsId").val(),

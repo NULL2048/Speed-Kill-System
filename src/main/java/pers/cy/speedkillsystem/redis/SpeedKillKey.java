@@ -1,9 +1,11 @@
 package pers.cy.speedkillsystem.redis;
 
 public class SpeedKillKey extends BasePrefix {
-    private SpeedKillKey(String prefix) {
-        super(prefix);
+    private SpeedKillKey(int expireSeconds, String prefix) {
+        super(expireSeconds, prefix);
     }
 
-    public static SpeedKillKey isGoodsOver = new SpeedKillKey("go");
+    public static SpeedKillKey isGoodsOver = new SpeedKillKey(0, "go");
+
+    public static SpeedKillKey getSpeedKillPath = new SpeedKillKey(60, "skp");
 }

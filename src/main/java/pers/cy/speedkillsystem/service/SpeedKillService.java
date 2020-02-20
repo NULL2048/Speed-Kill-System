@@ -9,6 +9,8 @@ import pers.cy.speedkillsystem.domain.SksOrder;
 import pers.cy.speedkillsystem.domain.SksUser;
 import pers.cy.speedkillsystem.redis.RedisService;
 import pers.cy.speedkillsystem.redis.SpeedKillKey;
+import pers.cy.speedkillsystem.util.MD5Util;
+import pers.cy.speedkillsystem.util.UUIDUtil;
 import pers.cy.speedkillsystem.vo.GoodsVo;
 
 @Service
@@ -88,5 +90,20 @@ public class SpeedKillService {
      */
     private boolean getGoodsOver(long goodsId) {
         return redisService.exists(SpeedKillKey.isGoodsOver, "" + goodsId);
+    }
+
+    public boolean checkPath(SksUser user, long goodsId, String path) {
+        if (user == null || path == null) {
+            return false;
+        }
+
+        String pathOld = redisService.get(SpeedKillKey.getSpeedKillPath, "" + user.getId() + "_" + goodsId, String.class);
+        return path.equals(pathOld);
+    }
+
+    public String createSpeedKillPath(SksUser user, long goodsId) {
+        String str = MD5Util.md5(UUIDUtil.uuid() + "1949");
+        redisService.set(SpeedKillKey.getSpeedKillPath, "" + user.getId() + "_" + goodsId, str);
+        return str;
     }
 }

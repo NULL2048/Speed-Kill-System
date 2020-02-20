@@ -5,10 +5,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import pers.cy.speedkillsystem.domain.OrderInfo;
 import pers.cy.speedkillsystem.domain.SksOrder;
 import pers.cy.speedkillsystem.domain.SksUser;
@@ -16,16 +13,20 @@ import pers.cy.speedkillsystem.rabbitmq.MQSender;
 import pers.cy.speedkillsystem.rabbitmq.SpeedKillMessage;
 import pers.cy.speedkillsystem.redis.GoodsKey;
 import pers.cy.speedkillsystem.redis.RedisService;
+import pers.cy.speedkillsystem.redis.SpeedKillKey;
 import pers.cy.speedkillsystem.result.CodeMsg;
 import pers.cy.speedkillsystem.result.Result;
 import pers.cy.speedkillsystem.service.GoodsService;
 import pers.cy.speedkillsystem.service.OrderService;
 import pers.cy.speedkillsystem.service.SpeedKillService;
+import pers.cy.speedkillsystem.util.MD5Util;
+import pers.cy.speedkillsystem.util.UUIDUtil;
 import pers.cy.speedkillsystem.vo.GoodsVo;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/speed_kill")
@@ -85,13 +86,20 @@ public class SpeedKillController implements InitializingBean {
      * @param goodsId
      * @return
      */
-    @RequestMapping(value = "/do_speed_kill", method = RequestMethod.POST)
+    @RequestMapping(value = "/{path}/do_speed_kill", method = RequestMethod.POST)
     @ResponseBody
-    public Result<Integer> speedKill(Model model, SksUser user, @RequestParam("goodsId") long goodsId) {
+    public Result<Integer> speedKill(Model model, SksUser user, @RequestParam("goodsId") long goodsId,
+        @PathVariable("path") String path) {
         model.addAttribute("user", user);
         if (user == null) {
             // 用户session失效
             return Result.error(CodeMsg.SESSION_ERROR);
+        }
+
+        // 验证path
+        boolean check = speedKillService.checkPath(user, goodsId, path);
+        if (!check) {
+            return Result.error(CodeMsg.REQUEST_ILLEGAL);
         }
 
         // 先查询该商品是否已经无库存，如果无库存直接返回失败，就不要再预减库存了
@@ -171,5 +179,18 @@ public class SpeedKillController implements InitializingBean {
 
         long result = speedKillService.getSpeedKillResult(user.getId(), goodsId);
         return Result.success(result);
+    }
+
+    @RequestMapping(value = "/path", method = RequestMethod.GET)
+    @ResponseBody
+    public Result<String> getSpeedKillPath(Model model, SksUser user, @RequestParam("goodsId") long goodsId) {
+        model.addAttribute("user", user);
+        if (user == null) {
+            // 用户session失效
+            return Result.error(CodeMsg.SESSION_ERROR);
+        }
+
+        String path = speedKillService.createSpeedKillPath(user, goodsId);
+        return Result.success(path);
     }
 }
