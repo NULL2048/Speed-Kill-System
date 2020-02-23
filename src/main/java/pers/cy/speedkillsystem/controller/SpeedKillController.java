@@ -1,6 +1,7 @@
 package pers.cy.speedkillsystem.controller;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
+import org.apache.http.HttpResponse;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,11 @@ import pers.cy.speedkillsystem.util.MD5Util;
 import pers.cy.speedkillsystem.util.UUIDUtil;
 import pers.cy.speedkillsystem.vo.GoodsVo;
 
+import javax.imageio.ImageIO;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -192,5 +198,26 @@ public class SpeedKillController implements InitializingBean {
 
         String path = speedKillService.createSpeedKillPath(user, goodsId);
         return Result.success(path);
+    }
+
+    @RequestMapping(value = "/verifyCode", method = RequestMethod.GET)
+    @ResponseBody
+    public Result<String> getSpeedKillVerifyCode(HttpServletResponse response, SksUser user, @RequestParam("goodsId") long goodsId) {
+        if (user == null) {
+            // 用户session失效
+            return Result.error(CodeMsg.SESSION_ERROR);
+        }
+
+        BufferedImage image = speedKillService.createVerifyCode(user, goodsId);
+        try {
+            ServletOutputStream out = response.getOutputStream();
+            ImageIO.write(image, "JPEG", out);
+            out.flush();
+            out.close();
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.error(CodeMsg.SPEED_KILL_FALL);
+        }
     }
 }

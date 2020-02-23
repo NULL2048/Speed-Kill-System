@@ -36,6 +36,8 @@ public class CodeMsg {
     // 秒杀模块 5005XX
     public static CodeMsg SPEED_KILL_OVER = new CodeMsg(500500, "商品已经秒杀完毕");
     public static CodeMsg REPEATE_SPEED_KILL = new CodeMsg(500501, "不能重复秒杀");
+    public static CodeMsg SPEED_KILL_FALL = new CodeMsg(500502, "秒杀失败");
+
 
 
 
