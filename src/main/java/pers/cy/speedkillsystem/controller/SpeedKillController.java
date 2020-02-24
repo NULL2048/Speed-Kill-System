@@ -189,11 +189,18 @@ public class SpeedKillController implements InitializingBean {
 
     @RequestMapping(value = "/path", method = RequestMethod.GET)
     @ResponseBody
-    public Result<String> getSpeedKillPath(Model model, SksUser user, @RequestParam("goodsId") long goodsId) {
+    public Result<String> getSpeedKillPath(Model model, SksUser user, @RequestParam("goodsId") long goodsId,
+        @RequestParam("verifyCode") int verifyCode) {
         model.addAttribute("user", user);
         if (user == null) {
             // 用户session失效
             return Result.error(CodeMsg.SESSION_ERROR);
+        }
+
+        // 校验验证码
+        boolean check = speedKillService.checkVerifyCode(user, goodsId, verifyCode);
+        if (!check) {
+            return Result.error(CodeMsg.REQUEST_ILLEGAL);
         }
 
         String path = speedKillService.createSpeedKillPath(user, goodsId);

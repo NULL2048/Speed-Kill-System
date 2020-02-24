@@ -191,7 +191,30 @@ public class SpeedKillService {
         char op1 = ops[rdm.nextInt(3)];
         char op2 = ops[rdm.nextInt(3)];
 
-        String exp = num1 + op1 + num2 + op2 + num3 + "";
+        // 这里只有""放在最前面才能将后面的这些int和char传换成String，如果放到最后就不能正确的强制转换了
+        String exp = "" + num1 + op1 + num2 + op2 + num3;
         return exp;
+    }
+
+    /**
+     * 校验验证码
+     * @param user
+     * @param goodsId
+     * @param verifyCode
+     * @return
+     */
+    public boolean checkVerifyCode(SksUser user, long goodsId, int verifyCode) {
+        if (user == null || goodsId <= 0) {
+            return false;
+        }
+
+        Integer codeOld = redisService.get(SpeedKillKey.getSpeedKillVerifyCode, user.getId() + "," + goodsId, Integer.class);
+        if (codeOld == null || codeOld - verifyCode != 0) {
+            return false;
+        }
+
+        // 在redis中删除掉这个验证码
+        redisService.delete(SpeedKillKey.getSpeedKillVerifyCode, user.getId() + "," + goodsId);
+        return true;
     }
 }

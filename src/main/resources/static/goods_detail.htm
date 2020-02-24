@@ -52,7 +52,7 @@
                 <!--验证码-->
                 <div class="row">
                     <div class="form-inline">
-                        <img id="verifyCodeImg" width="80" height="32" style="display: none">
+                        <img id="verifyCodeImg" width="80" height="32" style="display: none" onclick="refreshVerifyCode()"/>
                         <input id="verifyCode" class="form-control" style="display: none">
 
                         <button class="btn btn-primary" type="button" id="buyButton" onclick="getSpeedKillPath()">立即秒杀</button>
@@ -87,6 +87,7 @@
             type:"GET",
             data:{
                 goodsId:goodsId,
+                verifyCode:$("#verifyCode").val()
             },
             success:function(data){
                 if(data.code == 0){
@@ -295,6 +296,16 @@
             $("#verifyCode").hide();
 
         }
+    }
+
+    /**
+     * 验证码刷新
+     */
+    function refreshVerifyCode() {
+        // 重新调用一下这个生成验证码的controller就行，因为浏览器都有缓存功能，这里加一个参数来避免浏览器缓存
+        // 如果不加这个，短时间内访问同样的域名，浏览器就会直接用缓存，使用旧的图片，就不能刷新新图片了
+        $("#verifyCodeImg").attr("src", "/speed_kill/verifyCode?goodsId=" + $("#goodsId").val() + "&timestamp=" + new Date().getTime());
+
     }
 </script>
 </html>
