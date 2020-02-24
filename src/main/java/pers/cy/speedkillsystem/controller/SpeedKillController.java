@@ -12,6 +12,7 @@ import pers.cy.speedkillsystem.domain.SksOrder;
 import pers.cy.speedkillsystem.domain.SksUser;
 import pers.cy.speedkillsystem.rabbitmq.MQSender;
 import pers.cy.speedkillsystem.rabbitmq.SpeedKillMessage;
+import pers.cy.speedkillsystem.redis.AccessKey;
 import pers.cy.speedkillsystem.redis.GoodsKey;
 import pers.cy.speedkillsystem.redis.RedisService;
 import pers.cy.speedkillsystem.redis.SpeedKillKey;
@@ -189,13 +190,27 @@ public class SpeedKillController implements InitializingBean {
 
     @RequestMapping(value = "/path", method = RequestMethod.GET)
     @ResponseBody
-    public Result<String> getSpeedKillPath(Model model, SksUser user, @RequestParam("goodsId") long goodsId,
+    public Result<String> getSpeedKillPath(HttpServletRequest request, Model model, SksUser user, @RequestParam("goodsId") long goodsId,
         @RequestParam("verifyCode") int verifyCode) {
         model.addAttribute("user", user);
         if (user == null) {
             // 用户session失效
             return Result.error(CodeMsg.SESSION_ERROR);
         }
+
+        // 查询访问次数  5秒钟访问5次
+        String uri = request.getRequestURI();
+        String key = uri + "_" + user.getId();
+        Integer count = redisService.get(AccessKey.access, "" + key, Integer.class);
+        if (count == null) {
+            redisService.set(AccessKey.access, key, 1);
+        } else if (count < 5) {
+            redisService.incr(AccessKey.access, key);
+        } else {
+            // 访问太频繁
+            return Result.error(CodeMsg.ACCESS_LIMIT_REACHED);
+        }
+
 
         // 校验验证码
         boolean check = speedKillService.checkVerifyCode(user, goodsId, verifyCode);
