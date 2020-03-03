@@ -12,6 +12,7 @@ import java.util.List;
 
 @Mapper
 public interface GoodsDao {
+    
     /**
      * 查询所有秒杀商品的数据
      * @return
