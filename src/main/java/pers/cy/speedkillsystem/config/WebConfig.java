@@ -5,7 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import pers.cy.speedkillsystem.Interceptor.AccessInterceptor;
 
 import java.util.List;
 
@@ -17,6 +19,10 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Autowired
     private UserArgumentResolver userArgumentResolver;
 
+    // 将拦截器注入到config中
+    @Autowired
+    private AccessInterceptor accessInterceptor;
+
 
     /**
      * spring mvc的controller中的方法参数都是框架调用这个方法来进行赋值的，自动根据controller方法中的参数进行赋值。他会遍历controller方法中的参数，如果有这个类型的参数，就会直接进行自动赋值
@@ -27,5 +33,14 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
         // 注册SksUser参数解析器注册
         argumentResolvers.add(userArgumentResolver);
+    }
+
+    /**
+     * 注册拦截器
+     * @param registry
+     */
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(accessInterceptor);
     }
 }

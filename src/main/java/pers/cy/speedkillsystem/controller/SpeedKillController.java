@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import pers.cy.speedkillsystem.annotation.AccessLimit;
 import pers.cy.speedkillsystem.domain.OrderInfo;
 import pers.cy.speedkillsystem.domain.SksOrder;
 import pers.cy.speedkillsystem.domain.SksUser;
@@ -175,6 +176,7 @@ public class SpeedKillController implements InitializingBean {
      * @param goodsId
      * @return  返回orderId表示下单成功  返回-1表示库存不足，下单失败   0：排队中
      */
+    @AccessLimit(seconds = 5, maxCount = 10, needLogin = true)
     @RequestMapping(value = "/result", method = RequestMethod.GET)
     @ResponseBody
     public Result<Long> speedKillResult(Model model, SksUser user, @RequestParam("goodsId") long goodsId) {
@@ -188,27 +190,16 @@ public class SpeedKillController implements InitializingBean {
         return Result.success(result);
     }
 
+    // 自定义注解，加了这个注解的controller表示一个用户最多5秒内请求5次，并且需要校验用户是否登录
+    @AccessLimit(seconds = 5, maxCount = 5, needLogin = true)
     @RequestMapping(value = "/path", method = RequestMethod.GET)
     @ResponseBody
-    public Result<String> getSpeedKillPath(HttpServletRequest request, Model model, SksUser user, @RequestParam("goodsId") long goodsId,
+    public Result<String> getSpeedKillPath(HttpServletRequest request, SksUser user, @RequestParam("goodsId") long goodsId,
         @RequestParam("verifyCode") int verifyCode) {
-        model.addAttribute("user", user);
+
         if (user == null) {
             // 用户session失效
             return Result.error(CodeMsg.SESSION_ERROR);
-        }
-
-        // 查询访问次数  5秒钟访问5次
-        String uri = request.getRequestURI();
-        String key = uri + "_" + user.getId();
-        Integer count = redisService.get(AccessKey.access, "" + key, Integer.class);
-        if (count == null) {
-            redisService.set(AccessKey.access, key, 1);
-        } else if (count < 5) {
-            redisService.incr(AccessKey.access, key);
-        } else {
-            // 访问太频繁
-            return Result.error(CodeMsg.ACCESS_LIMIT_REACHED);
         }
 
 

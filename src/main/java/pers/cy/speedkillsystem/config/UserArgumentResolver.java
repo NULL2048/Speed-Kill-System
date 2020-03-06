@@ -51,26 +51,17 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
      * @throws Exception
      */
     @Override
-    public Object resolveArgument(MethodParameter methodParameter, ModelAndViewContainer modelAndViewContainer, NativeWebRequest nativeWebRequest, WebDataBinderFactory webDataBinderFactory) throws Exception {
-        // 通过nativeWebRequest获得request对象和response对象
-        HttpServletRequest request = nativeWebRequest.getNativeRequest(HttpServletRequest.class);
-        HttpServletResponse response = nativeWebRequest.getNativeResponse(HttpServletResponse.class);
-
-        String paramToken = request.getParameter(SksUserService.COOKIE_NAME_TOKEN);
-        String cookieToken = getCookieValue(request, SksUserService.COOKIE_NAME_TOKEN);
-
-
-        // 如果都没有登陆凭证，则跳转回登陆页面
-        if (StringUtils.isEmpty(cookieToken) && StringUtils.isEmpty(paramToken)) {
-            return null;
-        }
-        // 优先取参数中的token，如果没有再取cookie中的token
-        String token = StringUtils.isEmpty(paramToken) ? cookieToken : paramToken;
-
-        // 根据token取得用户对象
-        return sksUserService.getByToken(token, response);
+   public Object resolveArgument(MethodParameter methodParameter, ModelAndViewContainer modelAndViewContainer, NativeWebRequest nativeWebRequest, WebDataBinderFactory webDataBinderFactory) throws Exception {
+        // 在拦截器已经将用户信息存到当前线程了，以后每次需要用户信息直接从本次请求的当前线程取就行了
+        return UserContext.getUser();
     }
 
+    /**
+     * 遍历cookie，取得cookie的内容
+     * @param request
+     * @param cookieName
+     * @return
+     */
     private String getCookieValue(HttpServletRequest request, String cookieName) {
         Cookie[] cookies = request.getCookies();
 
